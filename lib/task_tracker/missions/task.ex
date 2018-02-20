@@ -24,10 +24,10 @@ defmodule TaskTracker.Missions.Task do
 
   def validate_time(changeset, field, options \\ []) do
     validate_change(changeset, field, fn _, time ->
-      if rem(time,15) == 0 do
-         []
+      if rem(time,15) != 0 do
+         [{field, options[:message] || "Time has to increment by 15 minutes."}]
       else
-         [{field, options[:message] || "Time has to increment by 15"}]
+         []
       end
     end)
   end
